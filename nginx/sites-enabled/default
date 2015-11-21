@@ -1,0 +1,42 @@
+server {
+    listen 80;
+    listen 443 ssl;
+    ssl_certificate YOUR_SSL_CERTIFICATE;
+    ssl_certificate_key YOUR_SSL_CERTIFICATE_PRIVATE_KEY;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers   HIGH:!aNULL:!MD5;
+  
+    root     /var/www/nginx-imageproxy;
+
+    location / {
+        allow all;
+    }
+
+    location /resize {
+	lua_use_default_type off;
+	lua_ssl_trusted_certificate '/etc/ssl/certs/ca-certificates.crt';
+	lua_ssl_verify_depth 3;
+	resolver 8.8.8.8 ipv6=off;
+
+        content_by_lua_file '/etc/nginx/lua/imageproxy-resize.lua';
+    }
+
+    location /zoomcrop {
+	lua_use_default_type off;
+	lua_ssl_trusted_certificate '/etc/ssl/certs/ca-certificates.crt';
+	lua_ssl_verify_depth 3;
+	resolver 8.8.8.8 ipv6=off;
+
+        content_by_lua_file '/etc/nginx/lua/imageproxy-zoomcrop.lua';
+    }
+
+    location /crop {
+	lua_use_default_type off;
+	lua_ssl_trusted_certificate '/etc/ssl/certs/ca-certificates.crt';
+	lua_ssl_verify_depth 3;
+	resolver 8.8.8.8 ipv6=off;
+
+        content_by_lua_file '/etc/nginx/lua/imageproxy-crop.lua';
+    }
+}
+
