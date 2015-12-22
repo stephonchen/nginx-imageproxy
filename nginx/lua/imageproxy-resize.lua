@@ -9,6 +9,7 @@ local img_format = ''
 local img = ''
 
 --- url
+local http_method = ngx.req.get_method()
 local url = ngx.unescape_uri(ngx.var.arg_url)
 url = string.gsub(url, '?$', '')
 
@@ -16,7 +17,7 @@ local httpc = http.new()
 
 --- fetch image from remote url
 local res, err = httpc:request_uri(url, {
-  method = "GET",
+  method = http_method,
   headers = {
     ['User-Agent'] = user_agent,
   }
@@ -27,11 +28,11 @@ if not res then
   return
 end
 
---- if HTTP 302, refetch from Location header
-if res.status == 302 then
+--- if HTTP 301/302, refetch from Location header
+if res.status == 301 or res.status == 302 then
   url = res.headers["Location"]
   res, err = httpc:request_uri(url, {
-     method = "GET"
+     method = http_method
   })
   if not res then
     ngx.say("failed to request: ", err)
