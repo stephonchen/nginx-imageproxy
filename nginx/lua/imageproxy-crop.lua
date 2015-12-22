@@ -14,6 +14,7 @@ local url = ngx.unescape_uri(ngx.var.arg_url)
 url = string.gsub(url, '?$', '')
 
 local httpc = http.new()
+httpc:set_timeout(3000)
 
 --- fetch image from remote url
 local res, err = httpc:request_uri(url, {
@@ -54,6 +55,8 @@ elseif res.status == 200 then
     img = assert(magick.load_image_from_blob(res.body))
   end
 end
+
+httpc:close()
 
 --- width / height / x / y to integer
 local width = tonumber(ngx.var.arg_width)
