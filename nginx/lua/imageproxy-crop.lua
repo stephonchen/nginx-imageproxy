@@ -46,9 +46,13 @@ if res.status >= 400 and res.status < 600 then
   img_format = 'png'
   img = assert(magick.load_image('default.png'))
 elseif res.status == 200 then
-  content_type = res.headers['Content-Type']
-  img_format = string.gsub(content_type, 'image/', '')
-  img = assert(magick.load_image_from_blob(res.body))
+  if http_method == "HEAD" then
+    ngx.exit(ngx.HTTP_OK)
+  else
+    content_type = res.headers['Content-Type']
+    img_format = string.gsub(content_type, 'image/', '')
+    img = assert(magick.load_image_from_blob(res.body))
+  end
 end
 
 --- width / height / x / y to integer
