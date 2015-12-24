@@ -22,7 +22,7 @@
 
   Then use luarocks install magick
 
-  $ sudo luarocks install magick
+  $ sudo luarocks install magick lua-resty-http
 
 # Configuration
   Put sample config in nginx to /etc/nginx, modify as you need.
