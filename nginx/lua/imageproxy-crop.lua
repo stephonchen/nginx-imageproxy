@@ -3,7 +3,7 @@ local magick = require "magick"
 local http = require "resty.http"
 
 --- require magick and resty.http
-local user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
+local user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
 local content_type = ''
 local img_format = ''
 local img = ''
