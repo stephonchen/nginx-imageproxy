@@ -1,5 +1,14 @@
 # nginx-imageproxy
   Image Proxy based on nginx + lua + leafo/magick
+  This branch is based on docker
+
+# Build
+  git clone -b docker https://github.com/stephonchen/nginx-imageproxy
+  cd nginx-imageproxuy
+  docker build -t nginx-imageproxy .
+
+# Run
+  docker run -it -d -p 80:80 -p 443:443 --name=nginx-imageproxy nginx-imageproxy
 
 # Usage
   * Crop
@@ -22,8 +31,10 @@
 
   Then use luarocks install magick
 
-  $ sudo luarocks install magick lua-resty-http
+  $ sudo luarocks install magick
+  $ sudo luarocks install lua-resty-http
 
 # Configuration
   Put sample config in nginx to /etc/nginx, modify as you need.
-
+  Default enable HTTP (port 80).
+  If you want to enable HTTPS, please put correspondent SSL certificates, and enable ssl settings in nginx 
