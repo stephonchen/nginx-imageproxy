@@ -1,9 +1,3 @@
-#Description
-
-#Build : docker build -t smokeping:latest .
-
-#Run : docker run -d -p 80:80 smokeping:latest
-
 FROM ubuntu:16.04
 
 RUN echo "deb http://ppa.launchpad.net/ondrej/nginx/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/ondrej-ubuntu-nginx-xenial.list ; \
