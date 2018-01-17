@@ -1,8 +1,6 @@
-FROM ubuntu:16.04
+FROM debian:stable-slim
 
-RUN echo "deb http://ppa.launchpad.net/ondrej/nginx/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/ondrej-ubuntu-nginx-xenial.list ; \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv E5267A6C ; \
-    apt-get update ; \
+RUN apt-get update ; \
     apt-get install -y nginx-extras luajit libmagickwand-dev luarocks ca-certificates ; \
     sync ; sync ;sync ; \
     luarocks install magick ; \
