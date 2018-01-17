@@ -6,7 +6,7 @@
 # Build
   $ git clone -b docker https://github.com/stephonchen/nginx-imageproxy
 
-  $ cd nginx-imageproxuy
+  $ cd nginx-imageproxy
 
   $ docker build -t nginx-imageproxy .
 
